@@ -68,7 +68,27 @@ public class PhoneNumberList
 	//
 	public void remove (int index)
 	{
-		//TODO by yourself
+		PhoneNumber[] new_storage= new PhoneNumber[storage.length];
+
+		if(index ==count-1)
+		{
+			// for(int i=0;i<count-2;i++)
+			// {
+			// 	new_storage[i] = storage[i];
+			// }
+			// storage = new_storage;
+			storage[index] = null;
+		}
+		else{
+			for(int i = index; i < count -1; i++){
+        	storage[i] = storage[i + 1];
+      }
+		}
+
+
+
+		count--;
+
 
 
 
@@ -116,8 +136,24 @@ public class PhoneNumberList
 	public void add (PhoneNumber p)
 	{
 
-		//TODO by yourself
-	
+		int current_length = storage.length;
+		if(count==current_length)
+		{
+			PhoneNumber[] new_storage= new PhoneNumber[2*current_length];
+			for(int i = 0; i<storage.length;i++)
+			{
+				new_storage[i] = storage[i];
+			}
+			new_storage[count] = p;
+			storage = new_storage;
+			
+		}
+		else{
+			storage[count] = p;
+		}
+		
+
+		count+=1;
 	}
 
 	//
