@@ -7,11 +7,15 @@ public class IntegerLinkedList implements IntegerList
 {
 	private IntegerNode head;
 	private IntegerNode tail;
-	int size;
+	int count;
+	
+	
+	
 	public IntegerLinkedList()
 	{
-		head = tail = null;
-		size = 0;
+		this.head = null;
+		this.tail = null;
+		this.count = 0;
 
 	}
 
@@ -29,16 +33,28 @@ public class IntegerLinkedList implements IntegerList
 	 */
 	public void addFront (int x)
 	{
-		IntegerNode tmp = new IntegerNode(x, head);
-		tmp.setPrev(null);
-		if(head != null){
-			head.setPrev(tmp);
+		IntegerNode temp = new IntegerNode(x);
+		temp.setNext(null);
+		temp.setPrev(null);
+		
+		if(this.head != null){
+			temp.setNext(head);
+			head.setPrev(temp);
+			head = temp;
 		}
-		head = tmp;
-		if(tail == null){
-			tail = tmp;
+		else{
+			head = temp;
 		}
-		size++;
+		
+		if(this.tail!=null){
+			
+		}else{
+			tail = temp;
+		}
+		
+		this.count++;
+		
+		
 	}
 
 
@@ -56,21 +72,27 @@ public class IntegerLinkedList implements IntegerList
 	 */
 	public void addBack (int x)
 	{
-		IntegerNode tmp = new IntegerNode(x, null);
-		if(tail!=null){
-			tail.setNext(tmp);
-			tmp.setPrev(tail);
+		IntegerNode temp = new IntegerNode(x);
+		temp.setNext(null);
+		temp.setPrev(null);
+		
+		if(this.tail != null){
+			temp.setNext(null);
+			temp.setPrev(tail);
+			tail.setNext(temp);
+			tail=temp;
 		}
 		else{
-			tmp.setPrev(null);
+			tail = temp;
 		}
-		tail = tmp;
-
-		if(head == null){
-			head = tmp;
+		
+		if(this.head!=null){
+			
+		}else{
+			head=temp;
 		}
-
-		size++;
+		
+		this.count++;
 	}
 
 	/*
@@ -92,34 +114,33 @@ public class IntegerLinkedList implements IntegerList
 	 * If l is {1,2} and l.addAt(9,2) returns, then l is {1,2,9}
 	 */
 	public void addAt (int x, int pos)
-	{
-		if(pos == 0){
+	{	
+		IntegerNode temp = new IntegerNode(x);
+		temp.setNext(null);
+		temp.setPrev(null);
+		if(pos==0){
 			addFront(x);
 		}
-		else if(pos == size){
+		else if(pos==count){
 			addBack(x);
 		}
 		else{
-			IntegerNode tmp = new IntegerNode(x);
-			IntegerNode curr = head;
-			int count = 0;
-			while(curr.getNext() != null){
-				if(count == pos){
-					tmp.setNext(curr);
-					tmp.setPrev(curr.getPrev());
-					curr.getPrev().setNext(tmp);
-					curr.setPrev(tmp);
-					size++;
-					break;
-
-				}else{
-					count++;
-					curr = curr.getNext();
-				}
-
+		IntegerNode curr = this.head;
+		for(int i =0; curr.getNext()!= null;i++,curr=curr.getNext()){
+			if(i == pos){
+				IntegerNode prev = curr.getPrev();
+				IntegerNode next = curr;
+				
+				prev.setNext(temp);
+				temp.setPrev(prev);
+				temp.setNext(next);
+				next.setPrev(temp);
+				this.count++;
+				break;
+				
 			}
 		}
-
+		}
 	}
 
 	/*
@@ -135,7 +156,7 @@ public class IntegerLinkedList implements IntegerList
 	 */
 	public int size()
 	{
-		return size;
+		return this.count;
 	}
 
 	/*
@@ -153,28 +174,21 @@ public class IntegerLinkedList implements IntegerList
 	 */
 	public int  get (int pos)
 	{
-		if(size == 0){
-			return 0;
-		}
-		else{
-			IntegerNode curr = head;
-			int count =0;
-			while(curr.getNext() != null){
-				if(count == pos){
-					return curr.getValue();
-				}
-				else{
-					curr = curr.getNext();
-					count++;
-				}
-
-			}
-			if(count == pos){
+		IntegerNode curr = this.head;
+		
+		
+		for(int i=0; curr.getNext()!=null;i++,curr = curr.getNext()){
+			if(i == pos){
 				return curr.getValue();
 			}
-			return 0;
-
 		}
+		
+		if(pos == this.count-1){
+			return curr.getValue();
+		}
+		
+		return 0;
+			
 	}
 
 	/*
@@ -192,8 +206,9 @@ public class IntegerLinkedList implements IntegerList
 	 */
 	public void clear()
 	{
-		head = tail = null;
-		size =0;
+		head=null;
+		tail=null;
+		count=0;
 	}
 
 	/*
@@ -210,47 +225,39 @@ public class IntegerLinkedList implements IntegerList
 	 */
 	public void remove (int value)
 	{
-
-		IntegerNode curr = head;
-		while(curr.getNext()!= null){
-			if(curr.getValue() == value){
-				if(curr.getPrev() == null){//delete at the head
-					head = curr.getNext();
-					head.setPrev(null);
-					curr = head;
-					size--;
-				}else{
-					curr.getPrev().setNext(curr.getNext());
-					curr.getNext().setPrev(curr.getPrev());
-					curr =curr.getNext();
-					size--;
-				}
-
+		IntegerNode curr = this.head;
+	for(;curr.getNext()!= null; curr=curr.getNext()){
+		if(curr.getValue()==value){
+			if(curr.getPrev()==null){
+				head=head.getNext();
+				head.setPrev(null);
+				this.count--;
+			}else{IntegerNode prev=curr.getPrev();
+				  IntegerNode next=curr.getNext();
+				  prev.setNext(next);
+				  next.setPrev(prev);
+				  this.count--;
 			}
-			else{
-				curr =curr.getNext();
-			}
-
 		}
-		if(size == 1){
-			if(tail.getValue() == value){
-				head = tail = null;
-				size =0;
-			}
-
+	}
+	if(count==1){
+		if(tail.getValue()==value){
+			clear();
+		}}
+	else if(count>=1){
+		if(tail.getValue()==value){
+			tail=tail.getPrev();
+			tail.setNext(null);
+			this.count--;
+			
 		}
-		if(size>=2){
-			if(tail.getValue() == value){
-				tail = tail.getPrev();
-				tail.setNext(null);
-				size--;
-			}
-
-		}
-
-
-
-
+	}
+		
+	
+	
+	
+	
+	
 	}
 
 	/*
@@ -271,43 +278,35 @@ public class IntegerLinkedList implements IntegerList
 	 * If l is {1,2,3} and l.removeAt(2) returns, then l is {1,2}
 	 */
 	public void removeAt (int pos)
-	{ 
-			if(size == 0){
+	{if(count==1){
+		clear();
+	}
+	else if(count >=2){
+		if(pos==0){
+			head=head.getNext();
+			head.setPrev(null);
+			this.count--;
+		}
+			else if(pos==count-1){
+				tail=tail.getPrev();
+				tail.setNext(null);
+				this.count--;
 			}
-			else if(size == 1){
-				head = tail = null;
-				size =0;
-			}
-			else{
-				if(pos == 0){
-					head = head.getNext();
-					head.setPrev(null);
-					size --;
-				}
-				else if(pos == size -1){
-					tail = tail.getPrev();
-					tail.setNext(null);
-					size--;
-
-				}
-				else{
-					IntegerNode curr = head;
-					int count = 0;
-					while(curr.getNext()!= null){
-						if(count == pos){
-							curr.getPrev().setNext(curr.getNext());
-							curr.getNext().setPrev(curr.getPrev());
-							size--;
-							break;
-						}
-						else{
-							count++;
-							curr =curr.getNext();
-						}
+			else{IntegerNode curr = this.head;
+				for(int i = 0;curr.getNext()!=null;i++,curr=curr.getNext()){
+					if(i==pos){
+						IntegerNode prev=curr.getPrev();
+						IntegerNode next=curr.getNext();
+						prev.setNext(next);
+						next.setPrev(prev);
+						this.count--;
+						break;
 					}
 				}
+			
+			
 			}
-
+	}
 	}
 
 	/*
@@ -323,32 +322,19 @@ public class IntegerLinkedList implements IntegerList
 	 *
 	 */
 	public String toString()
-	{
-		String s = "{";
-		if(size ==0){
-			return s+="}";
-
+	{	String s = "{";
+		if(this.count==0){
+		return s+"}";
 		}
 		else{
-			IntegerNode curr = head;
-			while(curr.getNext() != null){
-				s+= curr.getValue()+",";
-				curr = curr.getNext();
+			IntegerNode curr = this.head;
+			for(;curr.getNext()!= null; curr=curr.getNext()){
+				s+=curr.getValue()+",";
 			}
-			s+= curr.getValue()+"}";
-			return s;
-		}
+			
+		s+=curr.getValue()+"}";
+		return s;
 		
+		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
