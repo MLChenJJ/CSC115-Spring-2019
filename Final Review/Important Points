@@ -1,4 +1,17 @@
 This file contains the important points for preparing the final exam:
 
+
+
+注意： 
+     以下整理的只是一些资料，只有在你不懂概念的时候，才参考下面的网址，不要浪费过多时间去理解以下网址上的内容！
+     
+     
 1. the possible exam points:
-  (1)
+  (1) Recursion                        https://www.geeksforgeeks.org/program-for-nth-fibonacci-number/
+  (2) Binary tree                      https://www.geeksforgeeks.org/binary-tree-set-1-introduction/
+  (3) Binary Search Tree               https://www.baeldung.com/java-binary-tree
+  (3) inorder, preorder, postorder     https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+  (4) effciency    http://interactivepython.org/courselib/static/pythonds/Trees/SearchTreeAnalysis.html
+                   https://www.cs.cmu.edu/~adamchik/15-121/lectures/Trees/trees.html
+                  
+                                      
