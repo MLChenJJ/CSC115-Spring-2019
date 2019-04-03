@@ -19,10 +19,66 @@
 18、 a
 19、 /这道题没讲过
 20、 a
-21、
-22、
-23、
-24、
-25、
-26、
+21、 排序算法，略过
+22、 排序算法，略过
+23、 c
+24、 d
+25、 不清楚，偏向于选择e
 
+Part C:
+(d) for(int i=0;i<100;i++){
+    System.out.print( (100-i) +" ");
+    }
+    
+Part D:
+(a)   while(aStack.isEmpty()){
+            tempStack.push(aStack.pop());
+        }
+
+      while(tempStack.isEmpty()){
+            System.out.println(tempStack.peek());
+            aStack.push(tempStack.pop());
+      }
+      
+      
+      
+(b)    int counter = 0;
+      while(aStack.isEmpty()){
+            tempStack.push(aStack.pop());
+            counter++;
+        }
+
+      while(tempStack.isEmpty()){
+            aStack.push(tempStack.pop());
+      }
+      System.out.println(" The number of items in aStack is:"+counter);
+      
+      
+(c) 
+     while(aStack.isEmpty()){
+          if(aStack.peek() == deleteString){
+              aStack.pop();
+          }
+          else{
+                 tempStack.push(aStack.pop());
+          }
+        }
+
+      while(tempStack.isEmpty()){
+            aStack.push(tempStack.pop());
+      }
+ 
+ 
+ Part E:
+ (c)   TreeNode root = new TreeNode("abc");
+       root.left = new TreeNode("def");
+       root.left.right =    new TreeNode("ghi");    
+       root.right = new TreeNode("jkl"); 
+
+
+
+    
+      
+      
+    
+ 
