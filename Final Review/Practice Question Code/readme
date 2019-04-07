@@ -1,0 +1,19 @@
+关于Pratice questoin，这里提供了实现代码，考试的时候可能用的上，请大参考复习！
+
+说明：
+  （1）Hashing部分，实现了 Map class and seperate chaining collision resolution
+  （2）关于Binary tree，（注意，不是binary search tree）， 按照顺序实现可所有要求练习的function
+  （3）关于Binary search tree 的function，请参见作业5中 BinarySearchTree.java文件，其中find function即为地一个需要实现的function;
+       pratice question 中的第二个function，只要将:
+                                if(key.compareTo(current.key) == 0){
+			                          return current;
+		                            }
+       改为：
+       if(key.compareTo(current.key) == 0){
+                                 current.value *=2;
+			                          return current;
+		                            }
+        即可，但是记住，这只适合用于Integer类型的value;
+        
+    (4)关于Stack ADT 练习，上次review中，样卷Part D 中(a)问，即是答案，所以，请参考样卷部分。
+    
